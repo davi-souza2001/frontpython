@@ -15,7 +15,7 @@ classes = {
 }
 # inicializa a GUI
 top = tk.Tk()
-top.geometry('1920x1080')
+top.geometry('800x600')
 top.title('PulmoScan')
 imagem = Image.open("./public/Logotipo.png")
 imagem_tk = ImageTk.PhotoImage(imagem)
