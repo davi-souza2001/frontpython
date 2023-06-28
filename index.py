@@ -8,17 +8,25 @@ from keras.models import load_model
 model = load_model('./model.h5')
 # dicionário para rotular todas as classes de câncer de pulmão
 classes = {
-    0: 'Adeno',
-    1: 'Large Cell',
-    2: 'Normal',
-    3: 'Squamous Cell',
+    0: 'Classificação: Adenocarcinoma',
+    1: 'Classificação: Large Cell Carcinoma',
+    2: 'Classificação: Normal',
+    3: 'Classificação: Squamous Cell Carcinoma',
 }
 # inicializa a GUI
 top = tk.Tk()
-top.geometry('800x600')
-top.title('Lung Cancer Classification')
-top.configure(background='#CDCDCD')
-label = Label(top, background='#CDCDCD', font=('arial', 15, 'bold'))
+top.geometry('1920x1080')
+top.title('PulmoScan')
+imagem = Image.open("./public/Logotipo.png")
+imagem_tk = ImageTk.PhotoImage(imagem)
+background = Image.open("./public/background.png")
+background_tk = ImageTk.PhotoImage(background)
+label_background = tk.Label(top, image=background_tk)
+label_background.place(x=0, y=0, relwidth=1, relheight=1)
+top.configure(background='#FFF')
+label = Label(top,
+              background='white',
+              font=('arial', 20, 'bold'))
 sign_image = Label(top)
 
 
@@ -34,7 +42,7 @@ def classify(file_path):
     pred = np.argmax(pred_probs)
     sign = classes[int(pred)]
     print(sign)
-    label.configure(foreground='#011638', text=sign)
+    label.configure(foreground='#00E3F0', text=sign)
 
 
 def show_classify_button(file_path):
@@ -46,7 +54,7 @@ def show_classify_button(file_path):
         pady=5
     )
     classify_b.configure(
-        background='#364156',
+        background='#00E3F0',
         foreground='white',
         font=('arial', 10, 'bold')
     )
@@ -76,7 +84,7 @@ upload = Button(
     pady=5
 )
 upload.configure(
-    background='#364156',
+    background='#00E3F0',
     foreground='white',
     font=('arial', 10, 'bold')
 )
@@ -85,10 +93,10 @@ sign_image.pack(side=BOTTOM, expand=True)
 label.pack(side=BOTTOM, expand=True)
 heading = Label(
     top,
-    text="Lung Cancer Classification",
+    image=imagem_tk,
     pady=20,
     font=('arial', 20, 'bold')
 )
-heading.configure(background='#CDCDCD', foreground='#364156')
+heading.configure(background='#FFF', foreground='#00E3F0')
 heading.pack()
 top.mainloop()
