@@ -35,6 +35,7 @@ def classify(file_path):
     image = Image.open(file_path)
     image = image.convert("RGB")
     image = image.resize((299, 299))
+    # Transforma a imagem em um array, expande as dimensões e faz a normalização
     image = np.array(image)
     image = np.expand_dims(image, axis=0)
     image = image.astype('float32') / 255.0
